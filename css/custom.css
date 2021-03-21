@@ -1,0 +1,316 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*==========================================================================
+-------------------------     Typography     ---------------------------
+============================================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.nav-item,
+.btn,
+h5 {
+	font-family: 'Montserrat', sans-serif;
+}
+
+h6,
+p,
+button,
+address,
+::placeholder,
+.collapse div,
+.lead {
+	font-family: 'Bitter', serif
+}
+
+.nav-item,
+h5 {
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.btn {
+	font-size: .9rem;
+}
+
+h5 {
+	font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+nav {
+	font-family: 'Bebas Neue', cursive;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+
+h6,
+p,
+button,
+address,
+::placeholder,
+.collapse div {
+	color: #86868b
+}
+
+p {
+	font-size: 15px;
+}
+
+h6 {
+	font-size: 0.9rem;
+}
+
+/*==========================================================================
+------------------------------     Main     --------------------------------
+============================================================================*/
+
+body {
+	height: 100%;
+}
+
+#background {
+	background-color: #141414;
+	position: absolute;
+	width: 100%;
+	top: calc(100vh);
+	transition: height 0.2s ease-out;
+}
+
+address {
+	letter-spacing: .3px;
+}
+
+/*==========================================================================
+-------------------------     Landing Screen     ---------------------------
+============================================================================*/
+
+#video-container,
+#profile-greyscale {
+	display: grid;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+}
+
+video {
+	background-color: black;
+}
+
+#profile-greyscale img {
+	clip-path: inset(100% 0 0 0);
+	transition: clip-path .3s ease-out;
+}
+
+#profile-video,
+#profile-greyscale img {
+	height: 100vh;
+	object-fit: cover;
+}
+
+#viewport-header {
+	position: relative;
+  	height: 100vh;
+	font-family: 'Bebas Neue', cursive;
+	color: white;
+	top: 0;
+    left: 0;
+}
+
+#viewport-header h1 {
+    margin-bottom: 0;
+}
+
+#viewport-header h4,
+#viewport-header h1 {
+	margin-left: 8px;
+}
+#viewport-header h4 {
+    font-size: 1.2rem;
+}
+
+#intro-arrow {
+	fill: white;
+    position: fixed;
+    right: 25%;
+    bottom: 20px;
+    height: 50px;
+    animation: updown 1s infinite ease-in-out 0.65s;
+	display: none;
+	cursor: pointer;
+	transition: right .65s ease-in-out;
+}
+
+@keyframes  updown {
+  0% {
+    transform: translateY(5%)
+  }
+  50% {
+    transform: translateY(-10%)
+  }
+  100% {
+	transform: translateY(5%)	
+	}
+}
+
+/*==========================================================================
+--------------------------     Header    -----------------------------
+============================================================================*/
+
+.sticky {
+	z-index: 100;
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+nav {
+	position: absolute;
+} 
+
+.navbar-brand {
+    letter-spacing: 1.6px;
+    font-size: 1.6rem;
+	color: #f5f5f7;
+}
+
+/*==========================================================================
+--------------------------     Introduction  -----------------------------
+============================================================================*/
+
+.jumbotron {
+    background-color: #141414;
+	color: #f5f5f7;
+}
+
+.social-icon {
+	height: 3rem;
+    width: 3rem;
+    fill: #f5f5f7;
+    margin-top: 11px;
+}
+
+a {
+	color: #a5a5ab;
+}
+
+a:hover {
+	color: #f5f5f7;
+}
+
+.highlight {
+	color: #f5f5f7;
+}
+
+/*==========================================================================
+--------------------------     Project Container   -----------------------------
+============================================================================*/
+
+.card-footer .btn {
+	border-color: #a5a5ab;
+	color: #a5a5ab;
+	width: 42%;
+}
+
+.card-footer .btn:hover {
+	border-color: #f5f5f7;
+	color: #f5f5f7;
+	background-color: #141414;
+}
+
+.more-info {
+	height: 50px;
+    text-align: left;
+    margin-left: -8px;
+    margin-top: -10px;
+	transition: transform .35s ease-in-out;
+	fill: #a5a5ab;
+}
+
+.card-body {
+	color: #f5f5f7;
+	padding-bottom: 0;
+}
+
+.card {
+	background-color: #141414;
+}
+
+.card-subtitle {
+	color: #86868b;
+}
+
+.card-title {
+	font-size: .97rem;
+}
+
+.project-link,
+.project-link:hover,
+.project-link:visited {
+	text-decoration: none;
+	color: black;
+}
+
+.card-footer {
+	border-color: #333333;
+}
+
+.card-img-top {
+	opacity: 85%;
+}
+
+.border-dark {
+    border-color: #333333 !important;
+}
+
+footer p {
+	color: #353434;
+}
+
+/*==========================================================================
+-------------------------     Media Queries     ----------------------------
+============================================================================*/
+
+@media (min-width: 768px) {
+	#down-arrow {
+		bottom: 20px;
+		height: 80px;
+		right: 27%;
+	}
+}
+
+@media (min-width: 992px) {
+	#down-arrow {
+		height: 90px;
+		bottom: 30px;
+	}
+/*---- Landing Screen ----*/
+	#profile-video,
+	#profile-greyscale img {
+		width: 100vw;
+	}
+	#viewport-header {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+	#viewport-header p,
+	#viewport-header h1 {
+		margin-left: 0;
+    	margin-bottom: 0;
+	}
+	
+	#viewport-header p {
+	margin-right: 1.6rem;
+	}
+}
