@@ -1,22 +1,6 @@
 // JavaScript Document
 
 /*==========================================================================
----------------------------     Video Source  ------------------------------
-============================================================================*/
-
-const videoContainer = document.querySelector('#video-container');
-const mobileVideoContainer = document.querySelector('#mobile-video-container');
-function removeVideo () {
-	if (window.innerWidth < 768) {
-		videoContainer.remove();
-	} else {
-		mobileVideoContainer.remove();
-	}
-}
-
-removeVideo();
-
-/*==========================================================================
 ---------------------     Sticky Header On Scroll  ------------------------
 ============================================================================*/
 
