@@ -84,7 +84,7 @@ function moveGreyscaleImg (e) {
 
 function touchMoveGreyscaleImg (e) {
 	e.preventDefault();
-	greyscaleProfileImg.style.transition = '';
+	greyscaleProfileImg.style.transition = 'clip-path .05s ease-out';
 	let screenHeight = window.innerHeight;
 	let currentPosition = ((1 - (e.changedTouches[0].pageY / screenHeight)) * 100);
 	let ScrollDirection = Math.floor(previousPosition) - Math.floor(currentPosition);
