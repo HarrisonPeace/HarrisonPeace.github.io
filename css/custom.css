@@ -201,6 +201,9 @@ nav {
 .navbar-light .navbar-brand {
     color: var(--main-bg-color);
 }
+.navbar-nav a:not(:first-child) {
+	display: none
+}
 
 /*==========================================================================
 --------------------------     Introduction  -----------------------------
@@ -301,6 +304,9 @@ footer p {
 		bottom: 20px;
 		height: 80px;
 		right: 27%;
+	}
+	.navbar-nav a:not(:first-child) {
+		display: inline-block;
 	}
 }
 
