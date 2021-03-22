@@ -4,7 +4,7 @@
 ---------------------------     Video Source  ------------------------------
 ============================================================================*/
 
-const LSvideoSource = document.querySelector('#video-container').querySelector('source');
+/*const LSvideoSource = document.querySelector('#video-container').querySelector('source');
 function changeVideoSource () {
 	if (window.innerWidth < 767) {
 		LSvideoSource.src = "video/profile-video-mobile.mp4";
@@ -13,7 +13,7 @@ function changeVideoSource () {
 
 changeVideoSource();
 
-window.onresize = () => changeVideoSource();
+window.onresize = () => changeVideoSource();*/
 
 /*==========================================================================
 ---------------------     Sticky Header On Scroll  ------------------------
@@ -58,7 +58,7 @@ let previousPosition = 0;
 
 function moveGreyscaleImg (e) {
 	let checkScrollDown = e.wheelDelta < 0 || downKeys.indexOf(e.keyCode) !== -1;
-    if (window.pageYOffset !== 0) { //allow scroll if user isnt at top of page
+    if (window.pageYOffset !== 0) { //allow scroll if user is not at top of page
         enableScroll();
 		scrollGreyscaleImg(-scrolls);
         scrolls = 0;
@@ -87,16 +87,22 @@ function touchMoveGreyscaleImg (e) {
 	let screenHeight = window.innerHeight;
 	let currentPosition = ((1 - (e.changedTouches[0].pageY / screenHeight)) * 100);
 	let ScrollDirection = Math.floor(previousPosition) - Math.floor(currentPosition);
+		if (window.pageYOffset !== 0) { //allow scroll if user is not at top of page
+			enableScroll();
+			scrollGreyscaleImg(-scrolls);
+			scrolls = 0;
+		} else {
 			if (scrolls === 0) { //if scroll location is at top of page
 				if ((ScrollDirection) < 0) {
 					enableScroll();
 					greyscaleProfileImg.style.transition = 'clip-path .3s ease-out';
-				} else {
-					scrollGreyscaleImg(ScrollDirection);
+				} else if ((ScrollDirection) == -1 || (ScrollDirection) == 1) {
+						scrollGreyscaleImg(ScrollDirection);
 				}
-			} else {
-				scrollGreyscaleImg(ScrollDirection);
+			} else if ((ScrollDirection) == -1 || (ScrollDirection) == 1) {
+						scrollGreyscaleImg(ScrollDirection);
 			}
+		}
 	previousPosition = currentPosition;
 }
 
@@ -187,7 +193,7 @@ downArrow.addEventListener('click', () => {
             behavior: 'smooth'
         });
     } else {
-        greyscaleProfileImg.style.transitionDuration = "1s";
+        greyscaleProfileImg.style.transitionDuration = ".6s";
         greyscaleProfileImg.style.clipPath = `inset(0px)`;
         setTimeout(() => {
             window.scroll({
