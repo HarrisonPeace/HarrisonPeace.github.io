@@ -83,7 +83,7 @@ function moveGreyscaleImg (e) {
 
 function touchMoveGreyscaleImg (e) {
 	e.preventDefault();
-	greyscaleProfileImg.style.transition = 'clip-path .05s ease-out';
+	greyscaleProfileImg.style.transition = '';
 	let screenHeight = window.innerHeight;
 	let currentPosition = ((1 - (e.changedTouches[0].pageY / screenHeight)) * 100);
 	let ScrollDirection = Math.floor(previousPosition) - Math.floor(currentPosition);
@@ -97,12 +97,12 @@ function touchMoveGreyscaleImg (e) {
 					enableScroll();
 					greyscaleProfileImg.style.transition = 'clip-path .3s ease-out';
 				} else if ((ScrollDirection) == -1 || (ScrollDirection) == 1) {
-						scrollGreyscaleImg(ScrollDirection * 2);
-						console.log(ScrollDirection * 2)
+						scrollGreyscaleImg(ScrollDirection);
+						console.log(ScrollDirection)
 				}
 			} else if ((ScrollDirection) == -1 || (ScrollDirection) == 1) {
-						scrollGreyscaleImg(ScrollDirection * 2);
-						console.log(ScrollDirection * 2)
+						scrollGreyscaleImg(ScrollDirection);
+						console.log(ScrollDirection)
 			}
 		}
 	previousPosition = currentPosition;
