@@ -173,7 +173,7 @@ if (window.innerWidth < 576) {
     setTimeout(() => downArrow.style.display = "block", 9899);
     setTimeout(() => downArrow.style.right = "17%", 9900);
 }
-if (window.innerWidth >= 768) {
+/*if (window.innerWidth >= 768) {*/
 	downArrow.addEventListener('click', () => {
 		if (greyscaleProfileImg.style.clipPath == `inset(0px)`) {
 			greyscaleProfileImg.style.transitionDuration = "0s";
@@ -197,7 +197,7 @@ if (window.innerWidth >= 768) {
 		enableScroll();
 		scrolls = 0;
 	});
-}
+/*}*/
 /*==========================================================================
 -------------------------     More Info Arrow    ---------------------------
 ============================================================================*/
