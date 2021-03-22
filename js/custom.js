@@ -4,15 +4,17 @@
 ---------------------------     Video Source  ------------------------------
 ============================================================================*/
 
-const videoContainer = document.querySelector('#video-container').querySelector('video');
-function removeMobileVideo () {
-	if (window.innerWidth < 767) {
-		let childNode = videoContainer.querySelector("SOURCE");
-		videoContainer.removeChild(childNode);
-	} 
+const videoContainer = document.querySelector('#video-container');
+const mobileVideoContainer = document.querySelector('#mobile-video-container');
+function removeVideo () {
+	if (window.innerWidth < 768) {
+		videoContainer.remove();
+	} else {
+		mobileVideoContainer.remove();
+	}
 }
 
-removeMobileVideo();
+removeVideo();
 
 /*==========================================================================
 ---------------------     Sticky Header On Scroll  ------------------------

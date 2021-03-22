@@ -100,7 +100,7 @@ address {
 -------------------------     Landing Screen     ---------------------------
 ============================================================================*/
 
-#video-container,
+.video-container,
 #profile-greyscale {
 	display: grid;
     height: 100vh;
@@ -122,7 +122,7 @@ video {
 	transition: clip-path .3s ease-out;
 }
 
-#profile-video,
+.profile-video,
 #profile-greyscale img {
 	height: 100vh;
 	object-fit: cover;
@@ -310,7 +310,7 @@ footer p {
 		bottom: 30px;
 	}
 /*---- Landing Screen ----*/
-	#profile-video,
+	.profile-video,
 	#profile-greyscale img {
 		width: 100vw;
 	}
