@@ -97,7 +97,8 @@ address {
 }
 
 html {
-  scroll-behavior: smooth;
+  	scroll-behavior: smooth;
+	background-color: var(--main-bg-color);
 }
 
 /*==========================================================================
