@@ -155,7 +155,7 @@ video {
     right: 25%;
     bottom: 20px;
     height: 50px;
-    animation: updown 1s infinite ease-in-out 0.65s;
+    animation: updown 1s infinite ease-in-out;
 	display: none;
 	cursor: pointer;
 	transition: right .65s ease-in-out;

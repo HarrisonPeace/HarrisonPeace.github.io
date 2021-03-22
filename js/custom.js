@@ -173,31 +173,31 @@ if (window.innerWidth < 576) {
     setTimeout(() => downArrow.style.display = "block", 9899);
     setTimeout(() => downArrow.style.right = "17%", 9900);
 }
-
-downArrow.addEventListener('click', () => {
-    if (greyscaleProfileImg.style.clipPath == `inset(0px)`) {
-		greyscaleProfileImg.style.transitionDuration = "0s";
-        window.scroll({
-            top: window.innerHeight,
-            left: 0,
-            behavior: 'smooth'
-        });
-    } else {
-        greyscaleProfileImg.style.transitionDuration = ".6s";
-        greyscaleProfileImg.style.clipPath = `inset(0px)`;
-        setTimeout(() => {
-            window.scroll({
-                top: window.innerHeight,
-                left: 0,
-                behavior: 'smooth'
-            });
-            greyscaleProfileImg.style.transitionDuration = "0.3s";
-        }, 1000);
-    }
-    enableScroll();
-    scrolls = 0;
-});
-
+if (window.innerWidth >= 768) {
+	downArrow.addEventListener('click', () => {
+		if (greyscaleProfileImg.style.clipPath == `inset(0px)`) {
+			greyscaleProfileImg.style.transitionDuration = "0s";
+			window.scroll({
+				top: window.innerHeight,
+				left: 0,
+				behavior: 'smooth'
+			});
+		} else {
+			greyscaleProfileImg.style.transitionDuration = ".6s";
+			greyscaleProfileImg.style.clipPath = `inset(0px)`;
+			setTimeout(() => {
+				window.scroll({
+					top: window.innerHeight,
+					left: 0,
+					behavior: 'smooth'
+				});
+				greyscaleProfileImg.style.transitionDuration = "0.3s";
+			}, 1000);
+		}
+		enableScroll();
+		scrolls = 0;
+	});
+}
 /*==========================================================================
 -------------------------     More Info Arrow    ---------------------------
 ============================================================================*/

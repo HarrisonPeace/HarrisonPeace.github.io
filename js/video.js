@@ -1,7 +1,5 @@
-// JavaScript Document
-
-let videoContainer = document.createElement('DIV')
-	videoContainer.className = "video-container"
+let videoContainer = document.createElement('DIV');
+	videoContainer.className = "video-container";
 
 if (window.innerWidth < 768) {
 	videoContainer.innerHTML = `
@@ -22,4 +20,4 @@ if (window.innerWidth < 768) {
 	`;
 }
 
-document.body.appendChild(videoContainer)
+document.body.appendChild(videoContainer);
