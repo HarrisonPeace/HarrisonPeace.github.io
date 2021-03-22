@@ -186,6 +186,7 @@ if (window.innerWidth < 576) {
 
 downArrow.addEventListener('click', () => {
     if (greyscaleProfileImg.style.clipPath == `inset(0px)`) {
+		greyscaleProfileImg.style.transitionDuration = "0s";
         window.scroll({
             top: window.innerHeight,
             left: 0,
