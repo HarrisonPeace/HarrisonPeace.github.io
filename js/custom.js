@@ -92,10 +92,10 @@ function touchMoveGreyscaleImg (e) {
 					enableScroll();
 					greyscaleProfileImg.style.transition = 'clip-path .3s ease-out';
 				} else if ((ScrollDirection) == -1 || (ScrollDirection) == 1) {
-						scrollGreyscaleImg(ScrollDirection * 2);
+						scrollGreyscaleImg(ScrollDirection * 4);
 				}
 			} else if ((ScrollDirection) == -1 || (ScrollDirection) == 1) {
-						scrollGreyscaleImg(ScrollDirection * 2);
+						scrollGreyscaleImg(ScrollDirection * 4);
 			}
 		}
 	previousPosition = currentPosition;
