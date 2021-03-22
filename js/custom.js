@@ -47,20 +47,10 @@ function moveGreyscaleImg (e) {
         enableScroll();
 		scrollGreyscaleImg(-scrolls);
         scrolls = 0;
-		window.addEventListener('scroll', () => {
-			if (window.pageYOffset == 0) {
-					disableScroll();
-			}
-		});
     } else {
 		if (scrolls === 0) { //if scroll location is at top of page
             if (checkScrollDown) {
                 enableScroll();
-				window.addEventListener('scroll', () => {
-					if (window.pageYOffset == 0) {
-						disableScroll();
-					}
-				});
 			} else {
 				scrollGreyscaleImg(20);
             }
@@ -150,6 +140,12 @@ function enableScroll() {
 }
 
 disableScroll();
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset == 0) {
+            disableScroll();
+    }
+});
 
 /*==========================================================================
 ---------------------     Main Content Background   ------------------------
