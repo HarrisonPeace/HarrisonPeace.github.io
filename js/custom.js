@@ -5,16 +5,14 @@
 ============================================================================*/
 
 const videoContainer = document.querySelector('#video-container').querySelector('video');
-function addmobileVideo () {
+function removeMobileVideo () {
 	if (window.innerWidth < 767) {
-		let source = document.createElement("SOURCE")
-		source.src = "video/profile-video-mobile.mp4";
-		source.type = "video/mp4"
-		videoContainer.insertBefore(source, videoContainer.childNodes[0]);
+		let childNode = videoContainer.querySelector("SOURCE");
+		videoContainer.removeChild(childNode);
 	} 
 }
 
-addmobileVideo();
+removeMobileVideo();
 
 /*==========================================================================
 ---------------------     Sticky Header On Scroll  ------------------------
