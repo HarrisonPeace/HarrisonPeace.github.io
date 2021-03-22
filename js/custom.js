@@ -4,16 +4,17 @@
 ---------------------------     Video Source  ------------------------------
 ============================================================================*/
 
-/*const LSvideoSource = document.querySelector('#video-container').querySelector('source');
-function changeVideoSource () {
+const videoContainer = document.querySelector('#video-container').querySelector('video');
+function addmobileVideo () {
 	if (window.innerWidth < 767) {
-		LSvideoSource.src = "video/profile-video-mobile.mp4";
-	}
+		let source = document.createElement("SOURCE")
+		source.src = "video/profile-video-mobile.mp4";
+		source.type = "video/mp4"
+		videoContainer.insertBefore(source, videoContainer.childNodes[0]);
+	} 
 }
 
-changeVideoSource();
-
-window.onresize = () => changeVideoSource();*/
+addmobileVideo();
 
 /*==========================================================================
 ---------------------     Sticky Header On Scroll  ------------------------
@@ -97,12 +98,10 @@ function touchMoveGreyscaleImg (e) {
 					enableScroll();
 					greyscaleProfileImg.style.transition = 'clip-path .3s ease-out';
 				} else if ((ScrollDirection) == -1 || (ScrollDirection) == 1) {
-						scrollGreyscaleImg(ScrollDirection);
-						console.log(ScrollDirection)
+						scrollGreyscaleImg(ScrollDirection * 2);
 				}
 			} else if ((ScrollDirection) == -1 || (ScrollDirection) == 1) {
-						scrollGreyscaleImg(ScrollDirection);
-						console.log(ScrollDirection)
+						scrollGreyscaleImg(ScrollDirection * 2);
 			}
 		}
 	previousPosition = currentPosition;
