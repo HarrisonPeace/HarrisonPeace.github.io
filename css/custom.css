@@ -129,6 +129,7 @@ video {
 .profile-video,
 #profile-greyscale img {
 	height: 100vh;
+	width: 100vw;
 	object-fit: cover;
 }
 
@@ -320,10 +321,10 @@ footer p {
 		bottom: 30px;
 	}
 /*---- Landing Screen ----*/
-	.profile-video,
+/*	.profile-video,
 	#profile-greyscale img {
 		width: 100vw;
-	}
+	}*/
 	#viewport-header {
 		display: flex;
 		justify-content: space-around;

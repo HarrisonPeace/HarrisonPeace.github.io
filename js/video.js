@@ -3,7 +3,7 @@ let videoContainer = document.createElement('DIV');
 
 if (window.innerWidth < 768) {
 	videoContainer.innerHTML = `
-		<video autoplay muted id="mobile-profile-video" class="profile-video">
+		<video playsinline autoplay muted id="mobile-profile-video" class="profile-video">
 			<source src="video/profile-video-mobile-reduced.mp4" type="video/mp4">
 			<source src="video/profile-video-reduced.webm" type="video/webm">
 			<source src="video/profile-video.mp4" type="video/mp4">
@@ -12,7 +12,7 @@ if (window.innerWidth < 768) {
 	`;
 } else {
 	videoContainer.innerHTML = `
-         <video autoplay muted id="profile-video" class="profile-video">
+         <video playsinline autoplay muted id="profile-video" class="profile-video">
 			<source src="video/profile-video-reduced.webm" type="video/webm">
 			<source src="video/profile-video.mp4" type="video/mp4">
 			 Your browser does not support HTML5 video.
