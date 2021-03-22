@@ -47,11 +47,21 @@ function moveGreyscaleImg (e) {
         enableScroll();
 		scrollGreyscaleImg(-scrolls);
         scrolls = 0;
+		window.addEventListener('scroll', () => {
+			if (window.pageYOffset == 0) {
+					disableScroll();
+			}
+		});
     } else {
 		if (scrolls === 0) { //if scroll location is at top of page
             if (checkScrollDown) {
                 enableScroll();
-            } else {
+				window.addEventListener('scroll', () => {
+					if (window.pageYOffset == 0) {
+						disableScroll();
+					}
+				});
+			} else {
 				scrollGreyscaleImg(20);
             }
         } else if (checkScrollDown) { //scrolling down
@@ -68,7 +78,7 @@ function moveGreyscaleImg (e) {
 
 function touchMoveGreyscaleImg (e) {
 	e.preventDefault();
-	greyscaleProfileImg.style.transition = 'clip-path .05s ease-out';
+	greyscaleProfileImg.style.transition = 'clip-path 250ms ease-out';
 	let screenHeight = window.innerHeight;
 	let currentPosition = ((1 - (e.changedTouches[0].pageY / screenHeight)) * 100);
 	let ScrollDirection = Math.floor(previousPosition) - Math.floor(currentPosition);
@@ -138,12 +148,6 @@ function enableScroll() {
     window.removeEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt);
     window.removeEventListener('keydown', keyboardMoveGreyscaleImg, false);
 }
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset == 0) {
-        disableScroll();
-    }
-});
 
 disableScroll();
 
