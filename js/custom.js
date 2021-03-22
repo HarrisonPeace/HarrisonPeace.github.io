@@ -43,6 +43,11 @@ let previousPosition = 0;
 
 function moveGreyscaleImg (e) {
 	let checkScrollDown = e.wheelDelta < 0 || downKeys.indexOf(e.keyCode) !== -1;
+	window.addEventListener('scroll', () => {
+		if (window.pageYOffset == 0) {
+				disableScroll();
+		}
+	});
     if (window.pageYOffset !== 0) { //allow scroll if user is not at top of page
         enableScroll();
 		scrollGreyscaleImg(-scrolls);
@@ -141,12 +146,6 @@ function enableScroll() {
 
 disableScroll();
 
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset == 0) {
-            disableScroll();
-    }
-});
-
 /*==========================================================================
 ---------------------     Main Content Background   ------------------------
 ============================================================================*/
@@ -169,7 +168,7 @@ if (window.innerWidth < 576) {
     setTimeout(() => downArrow.style.display = "block", 9899);
     setTimeout(() => downArrow.style.right = "17%", 9900);
 }
-/*if (window.innerWidth >= 768) {*/
+if (window.innerWidth >= 768) {
 	downArrow.addEventListener('click', () => {
 		if (greyscaleProfileImg.style.clipPath == `inset(0px)`) {
 			greyscaleProfileImg.style.transitionDuration = "0s";
@@ -193,7 +192,7 @@ if (window.innerWidth < 576) {
 		enableScroll();
 		scrolls = 0;
 	});
-/*}*/
+}
 /*==========================================================================
 -------------------------     More Info Arrow    ---------------------------
 ============================================================================*/
