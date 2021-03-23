@@ -153,7 +153,7 @@ disableScroll();
 let mainBackground = document.getElementById("background");
 let setBackground = () => mainBackground.style.height = `${document.body.clientHeight - window.innerHeight}px`;
 
-setTimeout(() => setBackground(), 100);
+window.onload = () => setBackground();
 window.onresize = () => setBackground();
 
 /*==========================================================================
