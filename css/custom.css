@@ -84,8 +84,12 @@ body {
 	height: 100%;
 }
 
-#background {
+#background,
+html {
 	background-color: var(--main-bg-color);
+}
+
+#background {
 	position: absolute;
 	width: 100%;
 	top: calc(100vh);
@@ -98,7 +102,6 @@ address {
 
 html {
   	scroll-behavior: smooth;
-	background-color: var(--main-bg-color);
 }
 
 /*==========================================================================
@@ -124,7 +127,7 @@ video {
 }
 
 #profile-greyscale img {
-	clip-path: inset(100% 0 0 0);
+	clip-path: inset(100% 0 0);
 	transition: clip-path .3s ease-out;
 }
 
@@ -241,6 +244,12 @@ a:hover,
 --------------------------     Project Container   -----------------------------
 ============================================================================*/
 
+#more-info-svg {
+	width: 150px;
+    margin-bottom: 15px;
+    margin-left: -6px;
+}
+
 .card-footer .btn {
 	border-color: var(--medium-grey-color);
 	color: var(--medium-grey-color);
@@ -292,6 +301,14 @@ a:hover,
 
 .card-img-top {
 	opacity: 85%;
+}
+
+.profile-img-overlay {
+	position: absolute;
+    left: 0;
+    top: 0;
+    clip-path: inset(100% 0px 0px);
+	transition: clip-path .4s ease-in-out;
 }
 
 .border-dark {

@@ -1,7 +1,7 @@
 // JavaScript Document
 
 /*==========================================================================
----------------------     Sticky Header On Scroll  ------------------------
+---------------------     Fixed Header On Scroll  ------------------------
 ============================================================================*/
 
 let nav = document.querySelector("nav");
@@ -9,8 +9,8 @@ let sticky = nav.offsetTop;
 let viewportHeader = document.getElementById("viewport-header");
 
 function stickyHeader() {
-    if (window.pageYOffset > sticky) {
-        nav.classList.add("sticky");
+    if (window.pageYOffset > sticky) { 
+        nav.classList.add("sticky"); //Fix nav to top of screen after viewport header
         viewportHeader.style.marginBottom = `${nav.offsetHeight}px`;
     } else {
         nav.classList.remove("sticky");
@@ -39,16 +39,16 @@ let keys = {
 let downKeys = [32, 40, 34, 35];
 let greyscaleProfileImg = document.getElementById('profile-greyscale').querySelector('img');
 let scrolls = 100;
-let previousPosition = 0;
+/*let previousPosition = 0;*/
 
-function moveGreyscaleImg (e) {
+function moveGreyscaleImg (e) { //move greyscale img for keyboard and mouse
 	let checkScrollDown = e.wheelDelta < 0 || downKeys.indexOf(e.keyCode) !== -1;
 	window.addEventListener('scroll', () => {
 		if (window.pageYOffset == 0) {
 				disableScroll();
 		}
 	});
-    if (window.pageYOffset !== 0) { //allow scroll if user is not at top of page
+    if (window.pageYOffset !== 0) { //allow scroll if not at top of page
         enableScroll();
 		scrollGreyscaleImg(-scrolls);
         scrolls = 0;
@@ -71,7 +71,9 @@ function moveGreyscaleImg (e) {
     }
 }
 
-function touchMoveGreyscaleImg (e) {
+//Working on function to allow touch scroll of grey scale img | it works but is not fluid enough for it to be a pleasurable experience
+
+/*function touchMoveGreyscaleImg (e) {
 	e.preventDefault();
 	greyscaleProfileImg.style.transition = 'clip-path 250ms ease-out';
 	let screenHeight = window.innerHeight;
@@ -94,11 +96,11 @@ function touchMoveGreyscaleImg (e) {
 			}
 		}
 	previousPosition = currentPosition;
-}
+}*/
 
 function scrollGreyscaleImg (length) {
 	scrolls += length;
-    greyscaleProfileImg.style.clipPath = `inset(${scrolls}% 0 0 0)`;
+    greyscaleProfileImg.style.clipPath = `inset(${scrolls}% 0 0)`;
 }
 
 function MouseMoveGreyscaleImg(e) {
@@ -133,23 +135,34 @@ let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewh
 function disableScroll() {
     window.addEventListener('DOMMouseScroll', MouseMoveGreyscaleImg, false); // older FF
     window.addEventListener(wheelEvent, MouseMoveGreyscaleImg, wheelOpt); // modern desktop
-    window.addEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt); // mobile
+/*    window.addEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt); // mobile*/
     window.addEventListener('keydown', keyboardMoveGreyscaleImg, false);
 }
 
 function enableScroll() {
     window.removeEventListener('DOMMouseScroll', MouseMoveGreyscaleImg, false);
     window.removeEventListener(wheelEvent, MouseMoveGreyscaleImg, wheelOpt);
-    window.removeEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt);
+/*    window.removeEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt);*/
     window.removeEventListener('keydown', keyboardMoveGreyscaleImg, false);
 }
 
 disableScroll();
 
+//show greyscale img once video has finished on screens less then 768px - touch
+if(window.innerWidth < 768) {
+	greyscaleProfileImg.style.transitionDuration = "0s";
+	greyscaleProfileImg.style.clipPath = 'inset(0 50%)';
+	setTimeout(() => {
+		greyscaleProfileImg.style.transitionDuration = "0.5s";
+		greyscaleProfileImg.style.clipPath = `inset(0 0 0)`;
+	}, 9500)
+}
+
 /*==========================================================================
 ---------------------     Main Content Background   ------------------------
 ============================================================================*/
 
+//add height to background based on screen size
 let mainBackground = document.getElementById("background");
 let setBackground = () => mainBackground.style.height = `${document.body.clientHeight - window.innerHeight}px`;
 
@@ -160,6 +173,7 @@ window.onresize = () => setBackground();
 ---------------------------     Intro Arrow    ------------------------------
 ============================================================================*/
 
+// animation of intro arrow
 const downArrow = document.querySelector("#intro-arrow");
 if (window.innerWidth < 576) {
     setTimeout(() => downArrow.style.display = "block", 9599);
@@ -168,6 +182,8 @@ if (window.innerWidth < 576) {
     setTimeout(() => downArrow.style.display = "block", 9899);
     setTimeout(() => downArrow.style.right = "17%", 9900);
 }
+
+//smooth scroll on click | disabled for touch screen as smooth scroll behaviour isn't supported
 if (window.innerWidth >= 768) {
 	downArrow.addEventListener('click', () => {
 		if (greyscaleProfileImg.style.clipPath == `inset(0px)`) {
@@ -178,7 +194,6 @@ if (window.innerWidth >= 768) {
 				behavior: 'smooth'
 			});
 		} else {
-			greyscaleProfileImg.style.transitionDuration = ".6s";
 			greyscaleProfileImg.style.clipPath = `inset(0px)`;
 			setTimeout(() => {
 				window.scroll({
@@ -186,33 +201,46 @@ if (window.innerWidth >= 768) {
 					left: 0,
 					behavior: 'smooth'
 				});
-				greyscaleProfileImg.style.transitionDuration = "0.3s";
 			}, 1000);
 		}
 		enableScroll();
 		scrolls = 0;
 	});
 }
+
+//remove display of arrow on touch screens so it doesnt appear at bottom of page
+window.addEventListener('touchmove', () => {
+	if (window.innerHeight < window.pageYOffset) {
+		downArrow.style.display = "none";
+	} else {
+		downArrow.style.display = "block";
+	}
+})
 /*==========================================================================
--------------------------     More Info Arrow    ---------------------------
+-------------------------    Project More Info   ---------------------------
 ============================================================================*/
 
 let projectsContainer = document.getElementById('projects-container');
+let moreInfoSvg = document.getElementById('more-info-svg');
 
 projectsContainer.addEventListener('click', (e) => {
+	//only register clicks for clicks on cards
     if (!(e.target.classList.contains("card-footer") || e.target.parentNode.classList.contains("card-footer"))) {
+		if (moreInfoSvg.style.display !== "none") {
+			moreInfoSvg.style.display = "none"
+		}
         let cardContainer = e.target.closest('.card');
-        let coverImg = cardContainer.querySelector('img');
+        let coverImg = cardContainer.querySelectorAll('img')[1];
         let moreInfoArrow = cardContainer.querySelector('svg');
-        if (coverImg.src.includes('-greyscale')) {
-            coverImg.src = coverImg.src.replace('-greyscale', ''); //change img to color
-            coverImg.style.opacity = "90%";
-            moreInfoArrow.style.transform = "rotate(-90deg) translate(0px, -5px)"; //tranform SVG
-            setTimeout(() => setBackground(), 300);
-        } else { //undo all changes on second click\
-            coverImg.src = coverImg.src.replace('.png', '-greyscale.png');
-            coverImg.style.opacity = "85%";
+        if (coverImg.classList.contains('clicked')) { //undo all changes on second click
+			coverImg.style.clipPath = 'inset(100% 0px 0px)'
             moreInfoArrow.style.transform = "rotate(0deg) translate(0px, 0px)";
+			coverImg.classList.remove("clicked");
+            setTimeout(() => setBackground(), 300);
+        } else { 
+			coverImg.style.clipPath = 'inset(0px 0px 0px)'; //change img to color
+            moreInfoArrow.style.transform = "rotate(-90deg) translate(0px, -5px)";
+			coverImg.classList.add("clicked");
             setTimeout(() => setBackground(), 300);
         }
     }
