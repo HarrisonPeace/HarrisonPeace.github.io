@@ -9,13 +9,13 @@ let sticky = nav.offsetTop;
 let viewportHeader = document.getElementById("viewport-header");
 
 function stickyHeader() {
-    if (window.pageYOffset > sticky) { 
-        nav.classList.add("sticky"); //Fix nav to top of screen after viewport header
-        viewportHeader.style.marginBottom = `${nav.offsetHeight}px`;
-    } else {
-        nav.classList.remove("sticky");
-        viewportHeader.style.marginBottom = '0px';
-    }
+	if (window.pageYOffset > sticky) {
+		nav.classList.add("sticky"); //Fix nav to top of screen after viewport header
+		viewportHeader.style.marginBottom = `${nav.offsetHeight}px`;
+	} else {
+		nav.classList.remove("sticky");
+		viewportHeader.style.marginBottom = '0px';
+	}
 }
 
 window.onresize = () => sticky = nav.offsetTop;
@@ -28,47 +28,47 @@ window.onscroll = () => stickyHeader();
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
 let keys = {
-    32: 1,
-    38: 1,
-    33: 1,
-    40: 1,
-    34: 1,
-    35: 1,
-    36: 1
+	32: 1,
+	38: 1,
+	33: 1,
+	40: 1,
+	34: 1,
+	35: 1,
+	36: 1
 };
 let downKeys = [32, 40, 34, 35];
 let greyscaleProfileImg = document.getElementById('profile-greyscale').querySelector('img');
 let scrolls = 100;
 /*let previousPosition = 0;*/
 
-function moveGreyscaleImg (e) { //move greyscale img for keyboard and mouse
+function moveGreyscaleImg(e) { //move greyscale img for keyboard and mouse
 	let checkScrollDown = e.wheelDelta < 0 || downKeys.indexOf(e.keyCode) !== -1;
 	window.addEventListener('scroll', () => {
 		if (window.pageYOffset == 0) {
-				disableScroll();
+			disableScroll();
 		}
 	});
-    if (window.pageYOffset !== 0) { //allow scroll if not at top of page
-        enableScroll();
+	if (window.pageYOffset !== 0) { //allow scroll if not at top of page
+		enableScroll();
 		scrollGreyscaleImg(-scrolls);
-        scrolls = 0;
-    } else {
+		scrolls = 0;
+	} else {
 		if (scrolls === 0) { //if scroll location is at top of page
-            if (checkScrollDown) {
-                enableScroll();
+			if (checkScrollDown) {
+				enableScroll();
 			} else {
 				scrollGreyscaleImg(20);
-            }
-        } else if (checkScrollDown) { //scrolling down
-            if (scrolls > 0) {
-                scrollGreyscaleImg(-10);
-            }
-        } else { //scrolling up
-            if (scrolls < 100) {
-                scrollGreyscaleImg(10);
-            }
-        }
-    }
+			}
+		} else if (checkScrollDown) { //scrolling down
+			if (scrolls > 0) {
+				scrollGreyscaleImg(-10);
+			}
+		} else { //scrolling up
+			if (scrolls < 100) {
+				scrollGreyscaleImg(10);
+			}
+		}
+	}
 }
 
 //Working on function to allow touch scroll of grey scale img | it works but is not fluid enough for it to be a pleasurable experience
@@ -98,64 +98,64 @@ function moveGreyscaleImg (e) { //move greyscale img for keyboard and mouse
 	previousPosition = currentPosition;
 }*/
 
-function scrollGreyscaleImg (length) {
+function scrollGreyscaleImg(length) {
 	scrolls += length;
-    greyscaleProfileImg.style.clipPath = `inset(${scrolls}% 0 0)`;
+	greyscaleProfileImg.style.clipPath = `inset(${scrolls}% 0 0)`;
 }
 
 function MouseMoveGreyscaleImg(e) {
-    e.preventDefault();
-    moveGreyscaleImg(e);
+	e.preventDefault();
+	moveGreyscaleImg(e);
 }
 
 function keyboardMoveGreyscaleImg(e) {
-    if (keys[e.keyCode]) {
+	if (keys[e.keyCode]) {
 		moveGreyscaleImg(e);
-        e.preventDefault();
-        return false;
-    }
+		e.preventDefault();
+		return false;
+	}
 }
 
 // modern Chrome requires { passive: false } when adding event
 let supportsPassive = false;
 
 try {
-    window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
-        get: function() {
-            supportsPassive = true;
-        }
-    }));
+	window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+		get: function() {
+			supportsPassive = true;
+		}
+	}));
 } catch (e) {}
 
 let wheelOpt = supportsPassive ? {
-    passive: false
+	passive: false
 } : false;
 let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
 function disableScroll() {
-    window.addEventListener('DOMMouseScroll', MouseMoveGreyscaleImg, false); // older FF
-    window.addEventListener(wheelEvent, MouseMoveGreyscaleImg, wheelOpt); // modern desktop
-/*    window.addEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt); // mobile*/
-    window.addEventListener('keydown', keyboardMoveGreyscaleImg, false);
+	window.addEventListener('DOMMouseScroll', MouseMoveGreyscaleImg, false); // older FF
+	window.addEventListener(wheelEvent, MouseMoveGreyscaleImg, wheelOpt); // modern desktop
+	/*    window.addEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt); // mobile*/
+	window.addEventListener('keydown', keyboardMoveGreyscaleImg, false);
 }
 
 function enableScroll() {
-    window.removeEventListener('DOMMouseScroll', MouseMoveGreyscaleImg, false);
-    window.removeEventListener(wheelEvent, MouseMoveGreyscaleImg, wheelOpt);
-/*    window.removeEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt);*/
-    window.removeEventListener('keydown', keyboardMoveGreyscaleImg, false);
+	window.removeEventListener('DOMMouseScroll', MouseMoveGreyscaleImg, false);
+	window.removeEventListener(wheelEvent, MouseMoveGreyscaleImg, wheelOpt);
+	/*    window.removeEventListener('touchmove', touchMoveGreyscaleImg, wheelOpt);*/
+	window.removeEventListener('keydown', keyboardMoveGreyscaleImg, false);
 }
 
 disableScroll();
 
 //show greyscale img once video has finished on screens less then 768px - touch
-if(window.innerWidth < 768) {
+if (window.innerWidth < 768) {
 	greyscaleProfileImg.style.transitionDuration = "0s";
 	greyscaleProfileImg.style.clipPath = 'inset(0 50%)';
 	setTimeout(() => {
 		greyscaleProfileImg.style.transitionDuration = "0.5s";
 		greyscaleProfileImg.style.clipPath = `inset(0 0 0)`;
-	}, 9500)
+	}, 9500);
 }
 
 /*==========================================================================
@@ -176,11 +176,11 @@ window.onresize = () => setBackground();
 // animation of intro arrow
 const downArrow = document.querySelector("#intro-arrow");
 if (window.innerWidth < 576) {
-    setTimeout(() => downArrow.style.display = "block", 9599);
-    setTimeout(() => downArrow.style.right = "17%", 9600);
+	setTimeout(() => downArrow.style.display = "block", 9599);
+	setTimeout(() => downArrow.style.right = "17%", 9600);
 } else {
-    setTimeout(() => downArrow.style.display = "block", 9899);
-    setTimeout(() => downArrow.style.right = "17%", 9900);
+	setTimeout(() => downArrow.style.display = "block", 9899);
+	setTimeout(() => downArrow.style.right = "17%", 9900);
 }
 
 //smooth scroll on click | disabled for touch screen as smooth scroll behaviour isn't supported
@@ -215,7 +215,7 @@ window.addEventListener('touchmove', () => {
 	} else {
 		downArrow.style.display = "block";
 	}
-})
+});
 /*==========================================================================
 -------------------------    Project More Info   ---------------------------
 ============================================================================*/
@@ -225,23 +225,23 @@ let moreInfoSvg = document.getElementById('more-info-svg');
 
 projectsContainer.addEventListener('click', (e) => {
 	//only register clicks for clicks on cards
-    if (!(e.target.classList.contains("card-footer") || e.target.parentNode.classList.contains("card-footer"))) {
+	if (!(e.target.classList.contains("card-footer") || e.target.parentNode.classList.contains("card-footer"))) {
 		if (moreInfoSvg.style.display !== "none") {
-			moreInfoSvg.style.display = "none"
+			moreInfoSvg.style.display = "none";
 		}
-        let cardContainer = e.target.closest('.card');
-        let coverImg = cardContainer.querySelectorAll('img')[1];
-        let moreInfoArrow = cardContainer.querySelector('svg');
-        if (coverImg.classList.contains('clicked')) { //undo all changes on second click
-			coverImg.style.clipPath = 'inset(100% 0px 0px)'
-            moreInfoArrow.style.transform = "rotate(0deg) translate(0px, 0px)";
+		let cardContainer = e.target.closest('.card');
+		let coverImg = cardContainer.querySelectorAll('img')[1];
+		let moreInfoArrow = cardContainer.querySelector('svg');
+		if (coverImg.classList.contains('clicked')) { //undo all changes on second click
+			coverImg.style.clipPath = 'inset(100% 0px 0px)';
+			moreInfoArrow.style.transform = "rotate(0deg) translate(0px, 0px)";
 			coverImg.classList.remove("clicked");
-            setTimeout(() => setBackground(), 300);
-        } else { 
+			setTimeout(() => setBackground(), 300);
+		} else {
 			coverImg.style.clipPath = 'inset(0px 0px 0px)'; //change img to color
-            moreInfoArrow.style.transform = "rotate(-90deg) translate(0px, -5px)";
+			moreInfoArrow.style.transform = "rotate(-90deg) translate(0px, -5px)";
 			coverImg.classList.add("clicked");
-            setTimeout(() => setBackground(), 300);
-        }
-    }
+			setTimeout(() => setBackground(), 300);
+		}
+	}
 });
