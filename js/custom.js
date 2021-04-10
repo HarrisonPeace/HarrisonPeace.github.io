@@ -9,17 +9,19 @@ let sticky = nav.offsetTop;
 let viewportHeader = document.getElementById("viewport-header");
 
 function stickyHeader() {
-	if (window.pageYOffset > sticky) {
-		nav.classList.add("sticky"); //Fix nav to top of screen after viewport header
-		viewportHeader.style.marginBottom = `${nav.offsetHeight}px`;
-	} else {
-		nav.classList.remove("sticky");
-		viewportHeader.style.marginBottom = '0px';
-	}
+    if (window.pageYOffset > sticky) {
+        nav.classList.add("sticky"); //Fix nav to top of screen after viewport header
+        viewportHeader.style.marginBottom = `${nav.offsetHeight}px`;
+    } else {
+        nav.classList.remove("sticky");
+        viewportHeader.style.marginBottom = '0px';
+    }
 }
 
-window.onresize = () => sticky = nav.offsetTop;
-window.onscroll = () => stickyHeader();
+if (window.innerWidth < 768) {
+	window.onresize = () => sticky = nav.offsetTop;
+	window.onscroll = () => stickyHeader();
+}
 
 /*==========================================================================
 ---------------------     Greyscale Img Scroll   ------------------------
@@ -38,16 +40,14 @@ let keys = {
 };
 let downKeys = [32, 40, 34, 35];
 let greyscaleProfileImg = document.getElementById('profile-greyscale').querySelector('img');
+let profileImg = document.getElementById('profile-img').querySelector('img');
 let scrolls = 100;
 /*let previousPosition = 0;*/
 
 function moveGreyscaleImg(e) { //move greyscale img for keyboard and mouse
-	let checkScrollDown = e.wheelDelta < 0 || downKeys.indexOf(e.keyCode) !== -1;
-	window.addEventListener('scroll', () => {
-		if (window.pageYOffset == 0) {
-			disableScroll();
-		}
-	});
+	let checkScrollDown = e.wheelDelta < 0 || /*most browsers scroll*/
+		downKeys.indexOf(e.keyCode) !== -1 || /*keyboard*/
+		e.deltaY > 0; /*firefox scroll*/
 	if (window.pageYOffset !== 0) { //allow scroll if not at top of page
 		enableScroll();
 		scrollGreyscaleImg(-scrolls);
@@ -148,15 +148,32 @@ function enableScroll() {
 
 disableScroll();
 
+window.addEventListener('scroll', () => {
+	if (window.pageYOffset == 0) {
+		disableScroll();
+	}
+});
+
 //show greyscale img once video has finished on screens less then 768px - touch
-if (window.innerWidth < 768) {
-	greyscaleProfileImg.style.transitionDuration = "0s";
-	greyscaleProfileImg.style.clipPath = 'inset(0 50%)';
-	setTimeout(() => {
-		greyscaleProfileImg.style.transitionDuration = "0.5s";
-		greyscaleProfileImg.style.clipPath = `inset(0 0 0)`;
-	}, 9500);
-}
+let vid = document.querySelector('video');
+vid.oncanplay = function() {
+    if (window.innerWidth < 768) {
+		greyscaleProfileImg.style.transitionDuration = "0s";
+		greyscaleProfileImg.style.clipPath = 'inset(0 50%)';
+		setTimeout(() => {
+			greyscaleProfileImg.style.transitionDuration = "0.6s";
+			greyscaleProfileImg.style.clipPath = `inset(0 0 0)`;
+		}, 9000);
+	} else {
+		profileImg.style.transitionDuration = "0s";
+		profileImg.style.clipPath = 'inset(0 50%)';
+		setTimeout(() => {
+			profileImg.style.transitionDuration = "0.6s";
+			profileImg.style.clipPath = `inset(0 0 0)`;
+		}, 9500);
+	}
+};
+
 
 /*==========================================================================
 ---------------------     Main Content Background   ------------------------
@@ -208,7 +225,7 @@ if (window.innerWidth >= 768) {
 	});
 }
 
-//remove display of arrow on touch screens so it doesnt appear at bottom of page
+//remove display of arrow on touch screens after scroll so it doesnt appear at bottom of page
 window.addEventListener('touchmove', () => {
 	if (window.innerHeight < window.pageYOffset) {
 		downArrow.style.display = "none";
@@ -216,6 +233,7 @@ window.addEventListener('touchmove', () => {
 		downArrow.style.display = "block";
 	}
 });
+
 /*==========================================================================
 -------------------------    Project More Info   ---------------------------
 ============================================================================*/
@@ -245,3 +263,34 @@ projectsContainer.addEventListener('click', (e) => {
 		}
 	}
 });
+
+/*==========================================================================
+------------------------    Animated GIF Favicon   -------------------------
+============================================================================*/
+
+let image_counter = 0; // To keep track of the current image
+
+setInterval(function() {
+    // remove current favicon
+	if(document.querySelector("link[rel='icon']") !== null) {
+		document.querySelector("link[rel='icon']").remove();
+	}
+    if(document.querySelector("link[rel='shortcut icon']") !== null) {
+		document.querySelector("link[rel='shortcut icon']").remove();
+	}
+        
+    // add new favicon image
+	if (image_counter < 10) {
+		document.querySelector("head").insertAdjacentHTML('beforeend', `<link rel="shortcut icon" href="images/favicons/favicon_000${image_counter}_P--H.png" type="image/png">`);
+	} else {
+		document.querySelector("head").insertAdjacentHTML('beforeend', `<link rel="shortcut icon" href="images/favicons/favicon_00${image_counter}_H--P.png" type="image/png">`);
+	}
+	
+    // If last image then goto first image
+    if(image_counter == 30) {
+		image_counter = 0;
+	}
+    else { // Else go to next image 
+		image_counter++;
+	}  
+}, 100);

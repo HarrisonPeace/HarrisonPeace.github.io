@@ -80,6 +80,11 @@ h6 {
 ------------------------------     Main     --------------------------------
 ============================================================================*/
 
+::selection {
+	color: var(--main-bg-color);
+ 	background-color: var(--light-grey-color);
+}
+
 body {
 	height: 100%;
 }
@@ -109,7 +114,8 @@ html {
 ============================================================================*/
 
 .video-container,
-#profile-greyscale {
+#profile-greyscale,
+#profile-img {
 	display: grid;
     height: 100vh;
 	width: 100vw;
@@ -126,13 +132,15 @@ video {
 	background-color: var(--main-bg-color);
 }
 
-#profile-greyscale img {
+#profile-greyscale img,
+#profile-img img {
 	clip-path: inset(100% 0 0);
 	transition: clip-path .3s ease-out;
 }
 
 .profile-video,
-#profile-greyscale img {
+#profile-greyscale img,
+#profile-img img {
 	height: 100vh;
 	width: 100vw;
 	object-fit: cover;
@@ -331,6 +339,9 @@ footer p {
 	}
 	.navbar-nav a:not(:first-child) {
 		display: inline-block;
+	}
+	.navbar-nav a:first-child {
+		display: none;
 	}
 }
 
