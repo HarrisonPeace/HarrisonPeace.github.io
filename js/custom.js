@@ -154,6 +154,9 @@ window.addEventListener('scroll', () => {
 
 
 window.addEventListener('load', function () {
+	let vidContainer = document.querySelector('.video-container');
+	let vid = vidContainer.querySelector('video');
+		vid.play();
     if (window.innerWidth < 768) { //show greyscale profile img when video has finished on screens less then 768px - touch
         greyscaleProfileImg.style.transitionDuration = "0s";
         greyscaleProfileImg.style.clipPath = 'inset(0 50%)';
