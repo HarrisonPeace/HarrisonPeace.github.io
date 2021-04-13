@@ -87,6 +87,7 @@ h6 {
 
 body {
 	height: 100%;
+	background-color: var(--main-bg-color);
 }
 
 #background,
@@ -135,7 +136,7 @@ video {
 #profile-greyscale img,
 #profile-img img {
 	clip-path: inset(100% 0 0);
-	transition: clip-path .3s ease-out;
+	transition: .3s ease-out;
 }
 
 .profile-video,
@@ -316,7 +317,7 @@ a:hover,
     left: 0;
     top: 0;
     clip-path: inset(100% 0px 0px);
-	transition: clip-path .4s ease-in-out;
+	transition: .4s ease-in-out;
 }
 
 .border-dark {

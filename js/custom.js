@@ -40,7 +40,6 @@ let keys = {
 };
 let downKeys = [32, 40, 34, 35];
 let greyscaleProfileImg = document.getElementById('profile-greyscale').querySelector('img');
-let profileImg = document.getElementById('profile-img').querySelector('img');
 let scrolls = 100;
 /*let previousPosition = 0;*/
 
@@ -71,8 +70,7 @@ function moveGreyscaleImg(e) { //move greyscale img for keyboard and mouse
 	}
 }
 
-//Working on function to allow touch scroll of grey scale img | it works but is not fluid enough for it to be a pleasurable experience
-
+//Working on a function to allow touch scroll of grey scale img | it works but is not fluid enough for it to be a pleasurable experience for users yet
 /*function touchMoveGreyscaleImg (e) {
 	e.preventDefault();
 	greyscaleProfileImg.style.transition = 'clip-path 250ms ease-out';
@@ -154,25 +152,36 @@ window.addEventListener('scroll', () => {
 	}
 });
 
-//show greyscale img once video has finished on screens less then 768px - touch
-let vid = document.querySelector('video');
-vid.oncanplay = function() {
-    if (window.innerWidth < 768) {
-		greyscaleProfileImg.style.transitionDuration = "0s";
-		greyscaleProfileImg.style.clipPath = 'inset(0 50%)';
-		setTimeout(() => {
-			greyscaleProfileImg.style.transitionDuration = "0.6s";
-			greyscaleProfileImg.style.clipPath = `inset(0 0 0)`;
-		}, 9000);
-	} else {
-		profileImg.style.transitionDuration = "0s";
-		profileImg.style.clipPath = 'inset(0 50%)';
-		setTimeout(() => {
-			profileImg.style.transitionDuration = "0.6s";
-			profileImg.style.clipPath = `inset(0 0 0)`;
-		}, 9500);
-	}
-};
+
+window.addEventListener('load', function () {
+    if (window.innerWidth < 768) { //show greyscale profile img when video has finished on screens less then 768px - touch
+        greyscaleProfileImg.style.transitionDuration = "0s";
+        greyscaleProfileImg.style.clipPath = 'inset(0 50%)';
+		greyscaleProfileImg.style.opacity = '0.1';
+        setTimeout(() => {
+            greyscaleProfileImg.style.transitionDuration = "0.9s";
+            greyscaleProfileImg.style.clipPath = `inset(0 0 0)`;
+			greyscaleProfileImg.style.opacity = '1';
+        }, 9000);
+    } else { // show color profile img on larger screen when video has finished to increase img quality
+		let vidContainer = document.querySelector('.video-container');
+		let profileImage = `	  
+			<div id="profile-img">
+				<img src="images/profile-cover.png" alt="Profile Cover image of harrison peace in color" loading="lazy">
+			</div>`
+		vidContainer.insertAdjacentHTML('afterend', profileImage);
+		let profileImg = document.getElementById('profile-img').querySelector('img');
+        profileImg.style.transitionDuration = "0s";
+        profileImg.style.clipPath = 'inset(0 50%)';
+		profileImg.style.opacity = '0.1';
+        setTimeout(() => {
+            profileImg.style.transitionDuration = "0.9s";
+            profileImg.style.clipPath = `inset(0 0 0)`;
+			profileImg.style.opacity = '1';
+        }, 9200);
+    }
+})
+
 
 
 /*==========================================================================
