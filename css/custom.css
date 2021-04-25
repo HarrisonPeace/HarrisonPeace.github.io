@@ -136,7 +136,7 @@ video {
 #profile-greyscale img,
 #profile-img img {
 	clip-path: inset(100% 0 0);
-	transition: .3s ease-out;
+	transition: clip-path .3s ease-out;
 }
 
 .profile-video,

@@ -154,7 +154,9 @@ window.addEventListener('scroll', () => {
 
 
 window.addEventListener('load', function () {
-	setBackground(); //set background height;
+	setTimeout(() => {
+		setBackground(); //set background height;
+    }, 1000);
 	let vidContainer = document.querySelector('.video-container');
 	let vid = vidContainer.querySelector('video');
 		vid.play();
@@ -166,7 +168,6 @@ window.addEventListener('load', function () {
             greyscaleProfileImg.style.transitionDuration = "0.9s";
             greyscaleProfileImg.style.clipPath = `inset(0 0 0)`;
 			greyscaleProfileImg.style.opacity = '1';
-			setBackground(); //set background height;
         }, 9000);
     } else { // show color profile img on larger screen when video has finished to increase img quality
 		let vidContainer = document.querySelector('.video-container');
@@ -183,8 +184,10 @@ window.addEventListener('load', function () {
             profileImg.style.transitionDuration = "0.9s";
             profileImg.style.clipPath = `inset(0 0 0)`;
 			profileImg.style.opacity = '1';
-			setBackground(); //set background height;
         }, 9200);
+		setTimeout(() => {
+            profileImg.style.transitionDuration = "0s";
+        }, 10000);		
     }
 })
 
@@ -198,6 +201,7 @@ window.addEventListener('load', function () {
 let mainBackground = document.getElementById("background");
 let setBackground = () => mainBackground.style.height = `${document.body.clientHeight - window.innerHeight}px`;
 
+setBackground();
 window.onresize = () => setBackground();
 
 /*==========================================================================
