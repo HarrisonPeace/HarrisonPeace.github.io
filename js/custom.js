@@ -168,7 +168,7 @@ window.addEventListener('load', function () {
             greyscaleProfileImg.style.transitionDuration = "0.9s";
             greyscaleProfileImg.style.clipPath = `inset(0 0 0)`;
 			greyscaleProfileImg.style.opacity = '1';
-        }, 9000);
+        }, 9500);
     } else { // show color profile img on larger screen when video has finished to increase img quality
 		let vidContainer = document.querySelector('.video-container');
 		let profileImage = `	  
